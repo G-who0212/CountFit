@@ -371,9 +371,7 @@ def main():
                                     pushup_max = max(pushup_max, right_arm_len)
                                 else:
                                     pushup_max = max(pushup_max, left_arm_len)
-                                print("pushup max: {}".format(pushup_max))
-                                print("right arm len: {}".format(right_arm_len))
-                                print()
+                                
                                 if (is_left is True and right_arm_len < pushup_max * 0.7) or (is_left is False and left_arm_len < pushup_max * 0.7):
                                     chk = 2
                                 elif (is_left is True and left_direction_cos <= math.cos(math.pi/3)) or (is_left is False and right_direction_cos <= math.cos(math.pi/3)):
@@ -461,9 +459,12 @@ def main():
                             right_knee_to_ankle = [pose_preds[0][16][0] - pose_preds[0][14][0], pose_preds[0][16][1] - pose_preds[0][14][1]]
                             left_knee_cos = get_cosine(left_knee_to_hip, left_knee_to_ankle)
                             right_knee_cos = get_cosine(right_knee_to_hip, right_knee_to_ankle)
-                            
+                            # 5: left_shoulder, 6: right_shoulder, 7: left_elbow, 8: right_elbow, 9: left_wrist, 10: right_wrist
+                            # 11: left_hip, 12: right_hip, 13: left_knee, 14: right_knee, 15: left_ankle, 16: right_ankle
                             if chk == 0:
-                                if (left_knee_cos < math.cos(math.pi*5/12)) and (right_knee_cos < math.cos(math.pi*5/12)): # 양 무릎의 각도가 150도 이상이면 준비된 동작으로 간주
+                                if (left_knee_cos < math.cos(math.pi*5/12)) and (right_knee_cos < math.cos(math.pi*5/12)) and \
+                                    (pose_preds[0][15][1] > pose_preds[0][13][1]) and (pose_preds[0][16][1] > pose_preds[0][14][1]) and \
+                                    (pose_preds[0][13][1] > pose_preds[0][11][1]) and (pose_preds[0][14][1] > pose_preds[0][12][1]): # 양 무릎의 각도가 150도 이상이고 엉덩이가 무릎보다 위, 무릎이 발목보다 위면 준비된 동작으로 간주
                                     chk = 1
                             elif chk == 1:
                                 if left_knee_cos >= squat_threshold1 and right_knee_cos >= squat_threshold1: # 무릎 각도가 90도보다 작아진다면 상태2로 변경
