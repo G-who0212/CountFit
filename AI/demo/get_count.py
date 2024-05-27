@@ -222,7 +222,7 @@ def get_cosine(v1, v2):
     """
     return (v1[0]*v2[0] + v1[1]*v2[1])/((abs(math.sqrt(v1[0]**2 + v1[1]**2)))*(abs(math.sqrt(v2[0]**2 + v2[1]**2))))
 
-def predict_image(image, chk):
+def predict_image(image, chk, work_out_type):
     # cudnn related setting
     cudnn.benchmark = cfg.CUDNN.BENCHMARK
     torch.backends.cudnn.deterministic = cfg.CUDNN.DETERMINISTIC
@@ -253,7 +253,7 @@ def predict_image(image, chk):
     # image_bgr = cv2.imread(args.image)
     image_bgr = image
 
-    work_out = SQUAT
+    work_out = work_out_type
     count = False
     # chk = 0 # count를 셀만한 정도로 움직였는지  check / 0: 준비X, 1: 운동 준비O, 2: count를 셀만큼의 가동범위 동작
     pushup_threshold1 = math.cos(math.pi*2/3) # 120도
@@ -372,34 +372,34 @@ def predict_image(image, chk):
                     elif (pose_preds[0][9][1] >= pose_preds[0][5][1]) or (pose_preds[0][10][1] >= pose_preds[0][6][1]): # 양 손목중 하나라도 어께보다 아래에 있다면 운동 준비 동작에서 벗어난 것으로 간주
                         chk = 0
             elif work_out == SQUAT:
-                cv2.circle(image_bgr, (int(pose_preds[0][5][0]), int(pose_preds[0][5][1])), 6, (CocoColors[5]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][6][0]), int(pose_preds[0][6][1])), 6, (CocoColors[6]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][7][0]), int(pose_preds[0][7][1])), 6, (CocoColors[7]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][8][0]), int(pose_preds[0][8][1])), 6, (CocoColors[8]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][9][0]), int(pose_preds[0][9][1])), 6, (CocoColors[9]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][10][0]), int(pose_preds[0][10][1])), 6, (CocoColors[10]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][5][0]), int(pose_preds[0][5][1])), 6, (CocoColors[5]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][6][0]), int(pose_preds[0][6][1])), 6, (CocoColors[6]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][7][0]), int(pose_preds[0][7][1])), 6, (CocoColors[7]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][8][0]), int(pose_preds[0][8][1])), 6, (CocoColors[8]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][9][0]), int(pose_preds[0][9][1])), 6, (CocoColors[9]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][10][0]), int(pose_preds[0][10][1])), 6, (CocoColors[10]), -1)
                 
-                cv2.line(image_bgr, (int(pose_preds[0][5][0]), int(pose_preds[0][5][1])), (int(pose_preds[0][7][0]), int(pose_preds[0][7][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][6][0]), int(pose_preds[0][6][1])), (int(pose_preds[0][8][0]), int(pose_preds[0][8][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][7][0]), int(pose_preds[0][7][1])), (int(pose_preds[0][9][0]), int(pose_preds[0][9][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][8][0]), int(pose_preds[0][8][1])), (int(pose_preds[0][10][0]), int(pose_preds[0][10][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][5][0]), int(pose_preds[0][5][1])), (int(pose_preds[0][6][0]), int(pose_preds[0][6][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][5][0]), int(pose_preds[0][5][1])), (int(pose_preds[0][11][0]), int(pose_preds[0][11][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][6][0]), int(pose_preds[0][6][1])), (int(pose_preds[0][12][0]), int(pose_preds[0][12][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][5][0]), int(pose_preds[0][5][1])), (int(pose_preds[0][7][0]), int(pose_preds[0][7][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][6][0]), int(pose_preds[0][6][1])), (int(pose_preds[0][8][0]), int(pose_preds[0][8][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][7][0]), int(pose_preds[0][7][1])), (int(pose_preds[0][9][0]), int(pose_preds[0][9][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][8][0]), int(pose_preds[0][8][1])), (int(pose_preds[0][10][0]), int(pose_preds[0][10][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][5][0]), int(pose_preds[0][5][1])), (int(pose_preds[0][6][0]), int(pose_preds[0][6][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][5][0]), int(pose_preds[0][5][1])), (int(pose_preds[0][11][0]), int(pose_preds[0][11][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][6][0]), int(pose_preds[0][6][1])), (int(pose_preds[0][12][0]), int(pose_preds[0][12][1])), CocoColors[6], 2)
                 
-                # 엉덩이, 무릎, 발목 점 찍어주기
-                cv2.circle(image_bgr, (int(pose_preds[0][11][0]), int(pose_preds[0][11][1])), 6, (CocoColors[11]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][12][0]), int(pose_preds[0][12][1])), 6, (CocoColors[12]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][13][0]), int(pose_preds[0][13][1])), 6, (CocoColors[13]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][14][0]), int(pose_preds[0][14][1])), 6, (CocoColors[14]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][15][0]), int(pose_preds[0][15][1])), 6, (CocoColors[15]), -1)
-                cv2.circle(image_bgr, (int(pose_preds[0][16][0]), int(pose_preds[0][16][1])), 6, (CocoColors[16]), -1)
+                # # 엉덩이, 무릎, 발목 점 찍어주기
+                # cv2.circle(image_bgr, (int(pose_preds[0][11][0]), int(pose_preds[0][11][1])), 6, (CocoColors[11]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][12][0]), int(pose_preds[0][12][1])), 6, (CocoColors[12]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][13][0]), int(pose_preds[0][13][1])), 6, (CocoColors[13]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][14][0]), int(pose_preds[0][14][1])), 6, (CocoColors[14]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][15][0]), int(pose_preds[0][15][1])), 6, (CocoColors[15]), -1)
+                # cv2.circle(image_bgr, (int(pose_preds[0][16][0]), int(pose_preds[0][16][1])), 6, (CocoColors[16]), -1)
                 
-                cv2.line(image_bgr, (int(pose_preds[0][11][0]), int(pose_preds[0][11][1])), (int(pose_preds[0][13][0]), int(pose_preds[0][13][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][12][0]), int(pose_preds[0][12][1])), (int(pose_preds[0][14][0]), int(pose_preds[0][14][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][13][0]), int(pose_preds[0][13][1])), (int(pose_preds[0][15][0]), int(pose_preds[0][15][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][14][0]), int(pose_preds[0][14][1])), (int(pose_preds[0][16][0]), int(pose_preds[0][16][1])), CocoColors[6], 2)
-                cv2.line(image_bgr, (int(pose_preds[0][11][0]), int(pose_preds[0][11][1])), (int(pose_preds[0][12][0]), int(pose_preds[0][12][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][11][0]), int(pose_preds[0][11][1])), (int(pose_preds[0][13][0]), int(pose_preds[0][13][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][12][0]), int(pose_preds[0][12][1])), (int(pose_preds[0][14][0]), int(pose_preds[0][14][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][13][0]), int(pose_preds[0][13][1])), (int(pose_preds[0][15][0]), int(pose_preds[0][15][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][14][0]), int(pose_preds[0][14][1])), (int(pose_preds[0][16][0]), int(pose_preds[0][16][1])), CocoColors[6], 2)
+                # cv2.line(image_bgr, (int(pose_preds[0][11][0]), int(pose_preds[0][11][1])), (int(pose_preds[0][12][0]), int(pose_preds[0][12][1])), CocoColors[6], 2)
 
                 # 무릎->엉덩이 벡터, 무릎->발목 벡터 구하기
                 left_knee_to_hip = [pose_preds[0][11][0] - pose_preds[0][13][0], pose_preds[0][11][1] - pose_preds[0][13][1]]
@@ -422,8 +422,8 @@ def predict_image(image, chk):
                     if left_knee_cos < squat_threshold2 and right_knee_cos < squat_threshold2: # 무릎 각도가 120도보다 커진다면 count up
                         chk = 1
                         count  = True
-        cv2.imshow('demo',image_bgr)
-        if cv2.waitKey(0) & 0XFF==ord('q'):
-            cv2.destroyAllWindows()
+        # cv2.imshow('demo',image_bgr)
+        # if cv2.waitKey(0) & 0XFF==ord('q'):
+        #     cv2.destroyAllWindows()
         
     return count, chk
