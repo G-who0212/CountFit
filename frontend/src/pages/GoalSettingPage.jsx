@@ -74,7 +74,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: calc(100vh - 120px); // 네브바 높이를 제외한 전체 화면 높이
+    height: calc(100vh - 12vh); // 네브바 높이를 제외한 전체 화면 높이
     background-color: white;
 `;
 
@@ -89,7 +89,7 @@ const Content = styled.div`
 `;
 
 const Title = styled.div`
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 800;
     margin-bottom: 40px;
     text-align: center;
@@ -103,12 +103,12 @@ const ExerciseContainer = styled.div`
 `;
 
 const ExerciseButton = styled.button`
-    padding: 20px 50px;
+    padding: 20px 30px;
     border-radius: 50px;
     border: 2px solid ${(props) => (props.selected ? '#33AB11' : '#ccc')};
     background-color: ${(props) => (props.selected ? '#33AB11' : 'white')};
     color: ${(props) => (props.selected ? 'white' : 'black')};
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 700;
     cursor: pointer;
 
@@ -127,7 +127,7 @@ const InputContainer = styled.div`
 `;
 
 const InstructionText = styled.div`
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 800;
     margin-bottom: 40px;
     color: black;
@@ -141,25 +141,25 @@ const SelectedExerciseText = styled.span`
 
 const TargetInput = styled.input`
     padding: 15px;
-    font-size: 24px;
+    font-size: 18px;
     border-radius: 10px;
     border: 2px solid #ccc;
-    width: 300px;
+    width: 200px;
     text-align: center;
     margin-bottom: 80px;
 
     &:disabled {
         background-color: #f0f0f0;
         color: #aaa;
+       
     }
 `;
 
-const SubmitButton = styled.button`
-    width: 300px;
+const SubmitButton = styled.div`
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 700;
     border-radius: 50px;
     background-color: ${(props) => (props.disabled ? '#ccc' : '#1946A0')};

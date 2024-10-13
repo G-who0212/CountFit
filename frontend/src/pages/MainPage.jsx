@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { styled, keyframes } from 'styled-components';
 import { Link, Element } from 'react-scroll';
 import { useNavigate } from 'react-router-dom';
@@ -17,15 +17,21 @@ import sensor from '../assets/icon/mainpage3/sensor.jpg';
 import camera from '../assets/icon/mainpage3/camera.jpg';
 import gift from '../assets/icon/mainpage3/gift.jpg';
 import good from '../assets/icon/mainpage3/good.jpg';
+import { AuthContext } from '../contexts/AuthContext';
 
 function MainPage(props) {
 
     const navigate = useNavigate();
 
-    const handleStartClick = () => {
-        navigate('/goal-setting');
-    };
+    const { isLoggedIn } = useContext(AuthContext);
 
+    const handleStartClick = () => {
+        if (isLoggedIn) {
+            navigate('/goal-setting');
+        } else {
+            navigate('/login');
+        }
+    };
 
     return (
         <Container>
@@ -37,7 +43,7 @@ function MainPage(props) {
                 </Text>
                 <BtnContainer>
                     <GuideBtn>
-                        <Link to="secondSection" smooth={true} duration={700}>
+                        <Link to="secondSection" smooth={true} duration={500}>
                         이용 가이드 보러가기
                         </Link>
                     </GuideBtn>
@@ -66,11 +72,11 @@ function MainPage(props) {
                     <CheckItem>
                         <Circle>1</Circle>
                         <CheckText>
-                            <CheckTitle>서비스 진행을 위해 카카오 계정으로 로그인 해주세요.</CheckTitle>
+                            <CheckTitle>서비스 진행을 위해 로그인을 해주세요.</CheckTitle>
                             <CheckDescription>
-                                ⦁ 별도의 회원가입 절차 없이 카카오 계정만으로 빠르게 로그인할 수 있어요.
+                                ⦁ 아직 계정이 없다면 이메일 주소만으로 빠르게 회원가입할 수 있어요.
                                 <br />
-                                ⦁ 서비스 화면 우측 상단의 '로그인' 버튼 -> 카카오 계정으로 인증해주세요.
+                                ⦁ 회원가입 또한 서비스 화면 우측 상단의 '로그인' 버튼을 통해 진행해주세요.
                             </CheckDescription>
                             <ImgContainer>
                                 <MainLogin src={mainLogin} alt="mainLogin" />
@@ -93,6 +99,7 @@ function MainPage(props) {
                 </CheckListContainer>
             </SecondSection>
             </Element>
+            
             <ThirdSection>
                 <ThirdTitle>
                     본격적으로 CountFit 이용을 시작해볼까요?
@@ -146,55 +153,158 @@ function MainPage(props) {
     );
 }
 const Container = styled.div`
-    // background-color: pink;
-    //height: calc(100vh - 120px); // navbar 자리 남겨둠
     display: flex;
-    //align-items: center;
-    //justify-content: center;
     flex-direction: column;
 `
+
 const FirstSection = styled.div`
-    height: calc(100vh - 120px);
+    height: calc(100vh - 12vh);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    //background-color: green;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        height: calc(100vh - 10vh);
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        height: calc(100vh - 11vh);
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        height: calc(100vh - 12vh);
+    }
 `;
 
 const SecondSection = styled.div`
-    //padding: 100px 0;
+    padding-left: 100px;
+    padding-right: 100px;
     //background-color: pink;
     height: 100vh;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        padding-left: 20px;
+        padding-right: 20px;
+        height: auto;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
 `;
 
 const ThirdSection = styled.div`
-    //padding: 100px 0;
-    background-color: white;
+    padding-left: 100px;
+    padding-right: 100px;
+    //background-color: #4400ff;
     height: 100vh;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        padding-left: 20px;
+        padding-right: 20px;
+        height: auto;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
 `;
 
 const SecondTitle = styled.div`
-    font-size: 40px;
+    font-size: 35px;
     font-weight: 800;
-    margin-top: 150px;
-    margin-bottom: 100px;
-    margin-left: 100px;
+    padding-top: 100px;
+    margin-bottom: 50px;
     line-height: 1.5;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        font-size: 24px;
+        padding-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        font-size: 30px;
+        padding-top: 75px;
+        margin-bottom: 40px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        font-size: 35px;
+    }
 `;
 
 const CheckListContainer = styled.div`
     display: flex;
     justify-content: center;
     gap: 20px;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        flex-direction: row;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        flex-direction: row;
+    }
 `;
 
 const CheckItem = styled.div`
-    width: 600px;
+    width: 550px;
     background-color: white;
     padding: 40px;
     border-radius: 30px;
     border: 3px black solid;
     text-align: left;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        width: 90%;
+        padding: 20px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        width: 45%;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        width: 550px;
+    }
 `;
 
 const Circle = styled.div`
@@ -209,66 +319,227 @@ const Circle = styled.div`
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 20px;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        width: 35px;
+        height: 35px;
+        font-size: 17px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
 `;
 
 const CheckText = styled.div``;
 
 const CheckTitle = styled.div`
-    font-size: 28px;
+    font-size: 25px;
     font-weight: 800;
     margin-bottom: 20px;
     line-height: 1.5;
+    text-align: justify;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        font-size: 18px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        font-size: 22px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        font-size: 25px;
+    }
 `;
 
 const CheckDescription = styled.div`
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 1.8;
     color: #555;
     margin-bottom: 20px;
+    text-align: justify;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        font-size: 14px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        font-size: 16px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        font-size: 18px;
+    }
 `;
 
 const ImgContainer = styled.div`
     display: flex;
     justify-content: center;
     gap: 30px;
-    height: 100%;
-    //background-color: pink;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        flex-direction: row;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        flex-direction: row;
+    }
 `;
 
 const MainLogin = styled.img`
-    
+    height: 200px;
 `;
 
 const MainCamera1 = styled.img`
     padding-top: 70px;
+    //width: 100%;
+    //max-width: 250px;
+    //height: auto;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        max-width: 180px;
+        padding-top: 40px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        max-width: 220px;
+        padding-top: 55px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        max-width: 250px;
+        padding-top: 70px;
+    }
 `;
 
 const MainCamera2 = styled.img`
     padding-top: 70px;
+    //width: 100%;
+    //max-width: 250px;
+    //height: auto;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        max-width: 180px;
+        padding-top: 40px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        max-width: 220px;
+        padding-top: 55px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        max-width: 250px;
+        padding-top: 70px;
+    }
 `;
 
 const ThirdTitle = styled.div`
-    font-size: 40px;
+    font-size: 35px;
     font-weight: 800;
-    margin-top: 150px;
-    margin-bottom: 100px;
-    margin-left: 100px;
+    padding-top: 100px;
+    margin-bottom: 50px;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        font-size: 24px;
+        padding-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        font-size: 30px;
+        padding-top: 75px;
+        margin-bottom: 40px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        font-size: 35px;
+    }
 `;
 
 const ThirdCheckListContainer = styled.div`
     display: flex;
     justify-content: center;
     gap: 20px;
+
+     /* 모바일 화면 */
+     @media (max-width: 600px) {
+        gap: 15px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        flex-direction: row;
+        justify-content: center;
+    }
 `;
 
 const ThirdCheckItem = styled.div`
-    width: 400px;
+    width: 340px;
     background-color: white;
     padding: 40px;
     border-radius: 30px;
     border: 3px black solid;
     text-align: left;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        width: 90%;
+        padding: 20px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        width: 30%;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        width: 340px;
+    }
 `;
 
 const ThirdCircle = styled.div`
@@ -283,6 +554,27 @@ const ThirdCircle = styled.div`
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 20px;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        width: 35px;
+        height: 35px;
+        font-size: 17px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
 `;
 
 const ThirdCheckText = styled.div`
@@ -290,34 +582,140 @@ const ThirdCheckText = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: left;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        align-items: flex-start;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        align-items: center;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        align-items: center;
+    }
 `;
 
 const ThirdCheckTitle = styled.div`
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 800;
     margin-bottom: 20px;
     line-height: 1.5;
+    text-align: justify;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        font-size: 18px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        font-size: 22px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        font-size: 24px;
+    }
 `;
 
 const ThirdCheckDescription = styled.div`
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 1.8;
     color: #555;
     margin-bottom: 20px;
+    text-align: justify;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        font-size: 14px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        font-size: 16px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        font-size: 18px;
+    }
 `;
 
 
 const ThirdMainImage = styled.img`
+    width: 100%;
+    max-width: 300px;
+    height: auto;
 
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        max-width: 200px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        max-width: 250px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        max-width: 300px;
+    }
 `;
 
 const ThirdMainImage1 = styled.img`
     padding-top: 40px;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        max-width: 180px;
+        padding-top: 20px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        max-width: 220px;
+        padding-top: 30px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        max-width: 250px;
+        padding-top: 40px;
+    }
 `;
 
 const ThirdMainImage2 = styled.img`
     padding-top: 40px;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        max-width: 180px;
+        padding-top: 20px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        max-width: 220px;
+        padding-top: 30px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        max-width: 250px;
+        padding-top: 40px;
+    }
 `;
 
 const floatAnimation = keyframes`
@@ -333,7 +731,7 @@ const floatAnimation = keyframes`
 `
 
 const Text = styled.div`
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 800;
     animation: ${floatAnimation} 3s ease-in-out infinite;
     transform: translate(-50%, -50%);
@@ -342,71 +740,219 @@ const Text = styled.div`
     left: 50%;
     top: 35%;
     //background-color: yellow;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        font-size: 30px;
+        top: 30%;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        font-size: 40px;
+        top: 32%;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        font-size: 50px;
+        top: 35%;
+    }
 `
 const BtnContainer = styled.div`
     display: flex;
-    width: 580px;
-    //background-color: pink;
-    //font-size: 22px;
-    //font-weight: 600;
+    width: 500px;
     color: white;
     justify-content: space-between;
-    //margin-top: -200px;
+    margin-top: -100px;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        flex-direction: column;
+        width: 80%;
+        margin-top: -50px;
+        gap: 20px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        flex-direction: row;
+        width: 400px;
+        margin-top: -75px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        flex-direction: row;
+        width: 500px;
+        margin-top: -100px;
+    }
 `
 
 const GuideBtn = styled.div`
-    width: 300px;
+    width: 260px;
     background-color: #1946A0;
     cursor: pointer;
     border-radius: 50px;
     text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 22px;
     font-weight: 700;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        width: 100%;
+        font-size: 16px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        width: 200px;
+        font-size: 20px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        width: 260px;
+        font-size: 22px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
 `
 
 const StartBtn = styled.div`
-    width: 250px;
+    width: 200px;
     background-color: #33AB11;
     cursor: pointer;
     border-radius: 50px;
     text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 22px;
     font-weight: 700;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        width: 100%;
+        font-size: 16px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        width: 180px;
+        font-size: 20px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        width: 200px;
+        font-size: 22px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
 `
 
 const Btn = styled.div`
-    width: 230px;
+    width: 180px;
     background-color: #33AB11;
     cursor: pointer;
     border-radius: 50px;
     text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 23px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 20px;
     font-weight: 700;
     color: white;
     margin-top: 30px;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        width: 140px;
+        font-size: 16px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-top: 20px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        width: 160px;
+        font-size: 18px;
+        padding-top: 11px;
+        padding-bottom: 11px;
+        margin-top: 25px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        width: 180px;
+        font-size: 20px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        margin-top: 30px;
+    }
 `;
 
 const ImageContainer = styled.div`
     display: flex;
-    //justify-content: center;
-    //margin-top: 50px;
-    //padding-bottom: 20px;
     position: absolute;
-    top: 85%;
+    top: 80%;
     justify-content: space-between;
-    width: 1700px;
+    width: 1400px;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        flex-direction: column;
+        top: 70%;
+        //width: 100px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        flex-direction: row;
+        top: 75%;
+        width: 300px;
+        /* gap: 15px; */
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        flex-direction: row;
+        top: 80%;
+        width: 1400px;
+    }
 `;
 
 const MainImage = styled.img`
     width: 150px;
-    //max-width: 1200px; // 원하는 최대 너비를 설정하세요.
     height: 150px;
+
+    /* 모바일 화면 */
+    @media (max-width: 600px) {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* 태블릿 화면 */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* 데스크탑 화면 */
+    @media (min-width: 1025px) {
+        width: 150px;
+        height: 150px;
+    }
 `;
 
 export default MainPage;

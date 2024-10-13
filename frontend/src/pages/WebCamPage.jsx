@@ -11,8 +11,9 @@ function WebCamPage(props) {
 
     useEffect(() => {
       // 웹소켓으로 서버 연결
-      const chatSocket = new WebSocket(`ws://43.203.223.252:8000/ws/socket-server/`);
-  
+      const chatSocket = new WebSocket(`ws://13.124.73.55/ws/socket-server/`);
+      //const chatSocket = new WebSocket(`ws://127.0.0.1:8000/ws/socket-server/`);
+
       // 웹캠 프레임을 서버로 전달하는 함수
       const sendFrame = () => {
         if (webcamRef.current) {
@@ -30,7 +31,7 @@ function WebCamPage(props) {
           // 프레임 데이터 인코딩
           const base64Data = frameData.split(',')[1];
   
-          chatSocket.send(JSON.stringify({ // JSON형식으로 서버에 프레임 전달
+          chatSocket.send(JSON.stringify({ // JSON 형식으로 서버에 프레임 전달
             'type': 'video_frame',
             'data': base64Data
           }));
@@ -54,25 +55,51 @@ function WebCamPage(props) {
     }, []);
 
     return (
-        <div>
             <WebCamContainer>
-            <Webcam
-                audio={false}
-                ref={webcamRef}
-                width={1000}
-            />
+              <WebcamBox
+                  audio={false}
+                  ref={webcamRef}
+              />
+              <CountBox>
+                <Count>Count</Count>
+                <CountNum>{count}</CountNum>
+              </CountBox>
             </WebCamContainer>
-            <div id="count-container">
-              Count: <span id="count">{count}</span>
-            </div>
-        </div>
     );
 }
 
 const WebCamContainer = styled.div`
-    height: 100vh;
+    height: calc(100vh - 12vh);
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+`
+const WebcamBox = styled(Webcam)`
+    flex: 7;
+    height: 80vh;
     
 `
+const CountBox = styled.div`
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1946A0;
+    color: white;
+    margin-right: 80px;
+    border-radius: 30px;
+`;
 
+const Count = styled.div`
+    font-size: 48px; 
+    font-weight: bold;
+`
+
+const CountNum = styled.div`
+    font-size: 80px; /* Increased font size */
+    font-weight: bold;
+`;
 export default WebCamPage;

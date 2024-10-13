@@ -45,7 +45,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 800;
   display: flex;
   justify-content: center;
@@ -63,8 +63,8 @@ const ContentWrapper = styled.div`
 `;
 
 const VideoPlaceholder = styled.div`
-  width: 850px;
-  height: 600px;
+  width: 700px;
+  height: 400px;
   border: 2px solid #ccc;
   border-radius: 50px;
   margin-right: 20px;
@@ -99,7 +99,7 @@ const InstructionDescription = styled.div`
 `;
 
 const StartButton = styled.div`
-    width: 300px;
+    width: 200px;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
