@@ -159,7 +159,7 @@ function MyPage(props) {
                 <Message>사용자 정보가 없습니다.</Message>
             )}
 
-{isEditing && (
+            {isEditing && (
                 <EditForm onSubmit={handleUpdate}>
                     <FormGroup>
                         <FormLabel>성별:</FormLabel>

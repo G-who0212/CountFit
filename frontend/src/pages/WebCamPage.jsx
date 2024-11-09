@@ -41,7 +41,7 @@ function WebCamPage(props) {
       };
 
       // 1초 간격으로 sendFrame함수 호출
-      const interval = setInterval(sendFrame, 1000);
+      const interval = setInterval(sendFrame, 300);
   
       // count값 업데이트
       chatSocket.onmessage = function(e) {
