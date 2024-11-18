@@ -239,6 +239,7 @@ const SecondTitle = styled.div`
     padding-top: 100px;
     margin-bottom: 50px;
     line-height: 1.5;
+    cursor: default;
 
     /* 모바일 화면 */
     @media (max-width: 600px) {
@@ -319,6 +320,7 @@ const Circle = styled.div`
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 20px;
+    cursor: default;
 
     /* 모바일 화면 */
     @media (max-width: 600px) {
@@ -350,6 +352,7 @@ const CheckTitle = styled.div`
     margin-bottom: 20px;
     line-height: 1.5;
     text-align: justify;
+    cursor: default;
 
     /* 모바일 화면 */
     @media (max-width: 600px) {
@@ -374,6 +377,7 @@ const CheckDescription = styled.div`
     color: #555;
     margin-bottom: 20px;
     text-align: justify;
+    cursor: default;
 
     /* 모바일 화면 */
     @media (max-width: 600px) {
@@ -472,6 +476,7 @@ const ThirdTitle = styled.div`
     font-weight: 800;
     padding-top: 100px;
     margin-bottom: 50px;
+    cursor: default;
 
     /* 모바일 화면 */
     @media (max-width: 600px) {
@@ -554,6 +559,7 @@ const ThirdCircle = styled.div`
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 20px;
+    cursor: default;
 
     /* 모바일 화면 */
     @media (max-width: 600px) {
@@ -582,6 +588,7 @@ const ThirdCheckText = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: left;
+    cursor: default;
 
     /* 모바일 화면 */
     @media (max-width: 600px) {
@@ -739,6 +746,7 @@ const Text = styled.div`
     position: absolute;
     left: 50%;
     top: 35%;
+    cursor: default;
     //background-color: yellow;
 
     /* 모바일 화면 */

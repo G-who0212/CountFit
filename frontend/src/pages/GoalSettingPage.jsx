@@ -187,7 +187,12 @@ function GoalSettingPage(props) {
     const [selectedExercise, setSelectedExercise] = useState('');
     const [targetReps, setTargetReps] = useState('');
 
-    const exercises = ['push_up', 'squat', 'pull_up'];
+    // const exercises = ['push_up', 'squat', 'pull_up'];
+    const exercises = [
+        { value: 'push_up', label: '팔굽혀펴기' },
+        { value: 'squat', label: '스쿼트' },
+        { value: 'pull_up', label: '턱걸이' },
+    ];
 
     const handleExerciseClick = (exercise) => {
         setSelectedExercise(exercise);
@@ -217,11 +222,11 @@ function GoalSettingPage(props) {
                 <ExerciseContainer>
                     {exercises.map((exercise) => (
                         <ExerciseButton
-                            key={exercise}
-                            onClick={() => handleExerciseClick(exercise)}
-                            selected={selectedExercise === exercise}
+                            key={exercise.value}
+                            onClick={() => handleExerciseClick(exercise.value)}
+                            selected={selectedExercise === exercise.value}
                         >
-                            {exercise}
+                            {exercise.label}
                         </ExerciseButton>
                     ))}
                 </ExerciseContainer>
@@ -229,7 +234,8 @@ function GoalSettingPage(props) {
                     <InstructionText>
                         📌 오늘 하루{' '}
                         <SelectedExerciseText>
-                            {selectedExercise || '<운동 종목을 먼저 선택해주세요!>'}
+                            {/* {selectedExercise || '<운동 종목을 먼저 선택해주세요!>'} */}
+                            {selectedExercise ? exercises.find(ex => ex.value === selectedExercise).label : '<운동 종목을 먼저 선택해주세요!>'}
                         </SelectedExerciseText>{' '}
                         몇 회를 목표로 하시나요?
                     </InstructionText>
@@ -275,6 +281,7 @@ const Title = styled.div`
     margin-bottom: 40px;
     text-align: center;
     color: black;
+    cursor: default;
 `;
 
 const ExerciseContainer = styled.div`
@@ -313,6 +320,7 @@ const InstructionText = styled.div`
     margin-bottom: 40px;
     color: black;
     text-align: center;
+    cursor: default;
 `;
 
 const SelectedExerciseText = styled.span`
@@ -356,6 +364,3 @@ const SubmitButton = styled.div`
 
 
 export default GoalSettingPage;
-
-
-
