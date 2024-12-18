@@ -148,7 +148,7 @@ function SignUpPage(props) {
                 gender: gender,
                 ...(parsedAge !== undefined && { age: parsedAge })
             };
-            const response = await axios.post("http://13.124.73.55/account/signup/", data, {
+            const response = await axios.post("http://3.38.169.158/account/signup/", data, {
                 headers: {
                     "Content-Type": "application/json",
                     // 'Authorization': `Bearer ${TOKEN}`,
