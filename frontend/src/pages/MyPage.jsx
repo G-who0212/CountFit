@@ -26,7 +26,7 @@ function MyPage(props) {
             }
 
             try {
-                const response = await axios.get("http://3.38.169.158/account/userinfo/", {
+                const response = await axios.get("http://3.35.51.27/account/userinfo/", {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${accessToken}`,
@@ -88,7 +88,7 @@ function MyPage(props) {
                 age: age !== '' ? parseInt(age, 10) : null,
             };
 
-            const response = await axios.post("http://3.38.169.158/account/userinfo/", data, {
+            const response = await axios.post("http://3.35.51.27/account/userinfo/", data, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${accessToken}`,
