@@ -399,7 +399,7 @@ function WebCamPage(props) {
                     }
                     // 백엔드로 운동 종목과 달성 횟수 정보 보내기
                     try {
-                        const response = await axios.post('http://3.35.51.27/account/record/',
+                        const response = await axios.post('http://3.36.96.52/account/record/',
                             {
                                 sport_type: selectedExercise,
                                 aim_count: targetReps,

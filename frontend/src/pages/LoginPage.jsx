@@ -25,7 +25,7 @@ function LoginPage(props) {
             };
 
             // Send a POST request to the login endpoint
-            const response = await axios.post("http://3.35.51.27/account/signin/", data, {
+            const response = await axios.post("http://3.36.96.52/account/signin/", data, {
                 headers: {
                     "Content-Type": "application/json",
                 },
