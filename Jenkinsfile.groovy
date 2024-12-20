@@ -29,7 +29,7 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(['countfit-frontend-ec2-ssh-key']) {
+                sshagent(['countfit-backend-ec2-ssh-key']) {
                     sh '''
 ssh -o StrictHostKeyChecking=no ubuntu@15.164.225.85 <<EOF
 docker pull gwho0212/countfit-frontend:latest
