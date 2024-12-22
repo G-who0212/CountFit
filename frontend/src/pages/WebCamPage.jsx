@@ -367,7 +367,7 @@ function WebCamPage(props) {
     useEffect(() => {
         // WebSocket 서버에 연결
         // chatSocket.current = new WebSocket(`ws://13.125.98.207:8000/ws/socket-server/`);
-        chatSocket.current = new WebSocket(`ws://127.0.0.1:8000/ws/socket-server/`);
+        chatSocket.current = new WebSocket(`ws://43.200.245.185:8000/ws/socket-server/`);
 
         // WebSocket 연결이 열리면 선택한 운동 유형을 서버에 전송
         chatSocket.current.onopen = () => {
@@ -399,7 +399,7 @@ function WebCamPage(props) {
                     }
                     // 백엔드로 운동 종목과 달성 횟수 정보 보내기
                     try {
-                        const response = await axios.post('http://3.36.96.52/account/record/',
+                        const response = await axios.post('http://13.125.164.75/account/record/',
                             {
                                 sport_type: selectedExercise,
                                 aim_count: targetReps,
